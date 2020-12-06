@@ -97,7 +97,7 @@ def transform_frames(image_list):
 
 
 def get_prediction(file):
-    modelpath = "/app/app/models/modelopt1"
+    modelpath = 'https://drive.google.com/file/d/1IpTNWbotymVAGL6L29S2zhdT2aqgK4A5/view?usp=sharing'
     model = load_model(modelpath)
     model.eval()
     frames_list = get_frames(file)
