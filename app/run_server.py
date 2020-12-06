@@ -31,8 +31,7 @@ def load_model(model_path):
     global model
     with torch.no_grad():
         device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-        with open(model_path, 'rb') as f:
-            model = torch.load(f, map_location=device)
+        model = torch.utils.model_zoo.load_url(model_path)
     return model
 
 
