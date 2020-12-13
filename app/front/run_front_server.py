@@ -19,7 +19,7 @@ app.config.update(
     SECRET_KEY='you-will-never-guess',
 )
 app.config['MAX_CONTENT_LENGTH'] = 32 * 1024 * 1024
-app.config['UPLOAD_PATH'] = 'videos'
+app.config['UPLOAD_PATH'] = '/app/uploads'
 
 
 def get_prediction(filename):
