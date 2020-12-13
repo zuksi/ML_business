@@ -1,14 +1,12 @@
 import json
-
 from flask import Flask, render_template, redirect, url_for, request
 from flask_wtf import FlaskForm
 from requests.exceptions import ConnectionError
-from wtforms import  FileField,SubmitField
-from wtforms.validators import DataRequired
+from wtforms import SubmitField
+from flask_wtf.file import FileField
+from wtforms.validators import DataRequired, FileRequired, FileAllowed
 from werkzeug import secure_filename
-
 import urllib.request
-import json
 
 class ClientDataForm(FlaskForm):
     file = FileField('File', validators=[FileRequired(), FileAllowed(['avi', 'mp4'], 'Videos only!')])
