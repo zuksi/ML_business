@@ -121,7 +121,7 @@ def predict():
     dt = strftime("[%Y-%b-%d %H:%M:%S]")
     if request.method == 'POST':
         filename = ""
-        request_json = flask.request.get_json()
+        request_json = request.get_json()
         # file = request.files['file']
         # filename = '4031844.avi'
         if request_json["filename"]:
@@ -135,14 +135,14 @@ def predict():
             logger.warning(f'{dt} Exception: {str(e)}')
             data['predictions'] = str(e)
             data['success'] = False
-            return flask.jsonify(data)
+            return jsonify(data)
 
         data["predictions"] = class_name
             # indicate that the request was a success
         data["success"] = True
 
         # return the data dictionary as a JSON response
-    return flask.jsonify(data)
+    return jsonify(data)
 
 
 if __name__ == "__main__":
