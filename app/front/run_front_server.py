@@ -3,8 +3,8 @@ from flask import Flask, render_template, redirect, url_for, request
 from flask_wtf import FlaskForm
 from requests.exceptions import ConnectionError
 from wtforms import SubmitField
-from flask_wtf.file import FileField
-from wtforms.validators import DataRequired, FileRequired, FileAllowed
+from flask_wtf.file import FileField, FileAllowed, FileRequired
+from wtforms.validators import DataRequired
 from werkzeug import secure_filename
 import urllib.request
 
