@@ -3,7 +3,7 @@ import json
 from flask import Flask, render_template, redirect, url_for, request
 from flask_wtf import FlaskForm
 from requests.exceptions import ConnectionError
-from wtforms import IntegerField, SelectField, StringField
+from wtforms import  FileField,SubmitField
 from wtforms.validators import DataRequired
 from werkzeug import secure_filename
 
