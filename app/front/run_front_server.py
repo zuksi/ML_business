@@ -53,7 +53,7 @@ def predict_form():
         uploaded_file = request.files['file']
         filename = secure_filename(uploaded_file.filename)
         if uploaded_file.filename != '':
-            uploaded_file.save(os.path.join(app.config['UPLOAD_PATH'], filename))
+            uploaded_file.save(app.config['UPLOAD_PATH'])
         data['filename'] = filename
         try:
             response = str(get_prediction(data['filename']))
