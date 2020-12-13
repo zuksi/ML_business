@@ -7,6 +7,7 @@ from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms.validators import DataRequired
 from werkzeug import secure_filename
 import urllib.request
+import os
 
 class ClientDataForm(FlaskForm):
     file = FileField('File', validators=[FileRequired(), FileAllowed(['avi', 'mp4'], 'Videos only!')])
@@ -52,7 +53,6 @@ def predict_form():
         uploaded_file = request.files['file']
         filename = secure_filename(uploaded_file.filename)
         if uploaded_file.filename != '':
-            file_ext = os.path.splitext(filename)[1]
             uploaded_file.save(os.path.join(app.config['UPLOAD_PATH'], filename))
         data['filename'] = filename
         try:
