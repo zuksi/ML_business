@@ -18,7 +18,7 @@ app.config.update(
     CSRF_ENABLED=True,
     SECRET_KEY='you-will-never-guess',
 )
-app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024
+app.config['MAX_CONTENT_LENGTH'] = 32 * 1024 * 1024
 app.config['UPLOAD_PATH'] = 'uploads'
 
 
