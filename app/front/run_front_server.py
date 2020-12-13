@@ -25,7 +25,7 @@ app.config['UPLOAD_PATH'] = '/app/uploads'
 def get_prediction(filename):
     body = {'filename': filename}
 
-    myurl = "http://0.0.0.0:8180/predict"
+    myurl = "http://localhost:8180/predict"
     req = urllib.request.Request(myurl)
     req.add_header('Content-Type', 'application/json; charset=utf-8')
     jsondata = json.dumps(body)
