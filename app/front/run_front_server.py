@@ -5,18 +5,23 @@ from flask_wtf import FlaskForm
 from requests.exceptions import ConnectionError
 from wtforms import IntegerField, SelectField, StringField
 from wtforms.validators import DataRequired
+from werkzeug import secure_filename
 
 import urllib.request
 import json
 
 class ClientDataForm(FlaskForm):
-    filename = StringField('VideoFile', validators=[DataRequired()])
-
+    file = FileField('File', validators=[FileRequired(), FileAllowed(['avi', 'mp4'], 'Videos only!')])
+    submit = SubmitField('Submit')
+  
 app = Flask(__name__)
 app.config.update(
     CSRF_ENABLED=True,
     SECRET_KEY='you-will-never-guess',
 )
+app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024
+app.config['UPLOAD_PATH'] = 'uploads'
+
 
 def get_prediction(filename):
     body = {'filename': filename}
@@ -46,7 +51,12 @@ def predict_form():
     form = ClientDataForm()
     data = dict()
     if request.method == 'POST':
-        data['filename'] = request.form.get('filename')
+        uploaded_file = request.files['file']
+        filename = secure_filename(uploaded_file.filename)
+        if uploaded_file.filename != '':
+            file_ext = os.path.splitext(filename)[1]
+            uploaded_file.save(os.path.join(app.config['UPLOAD_PATH'], filename))
+        data['filename'] = filename
         try:
             response = str(get_prediction(data['filename']))
             print(response)
