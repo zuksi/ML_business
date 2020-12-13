@@ -2,7 +2,7 @@ import json
 from flask import Flask, render_template, redirect, url_for, request
 from flask_wtf import FlaskForm
 from requests.exceptions import ConnectionError
-import requests
+from urllib.error import HTTPError
 from wtforms import SubmitField
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms.validators import DataRequired
@@ -35,8 +35,9 @@ def get_prediction(filename):
     #print (jsondataasbytes)
     try:
         response = urllib.request.urlopen(req, jsondataasbytes)
-    except requests.HTTPError as e:
+    except HTTPError as e:
         content = e.read()
+        print(content)
     return json.loads(response.read())['predictions']
 
 @app.route("/")
